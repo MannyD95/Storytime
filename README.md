@@ -11,7 +11,7 @@ Also, I wanted to try out web dev, thus the choice of using Flask and boilerplat
 As of writing, it is not hosted publically, so to run the app you would need to clone the repo locally and input a secret key and your own OpenAI API key
 
 ## Future Considerations/Roadmap <br>
-As I become more skilled, I want to make this program more feature-complete, this will involve: <br>
+I want to make this program more feature-complete, this will involve: <br>
 > ability to fine tune narrative text based on reading level
 > 
 > incorporating AI image generation in combintion with text generation to remove the need for uploading and become one-button operational
