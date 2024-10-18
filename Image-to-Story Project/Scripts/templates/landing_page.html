@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Storytime: Upload an Image for a Short Story</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        #story, #error, #loading {
+            margin-top: 20px;
+        }
+        #uploadedImage {
+            max-width: 100%;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Storytime: Upload an Image for a Short Story</h1>
+    
+    <form id="uploadForm">
+        <input type="file" id="imageUpload" name="file" accept="image/*" required>
+        <button type="submit">Generate Your Story</button>
+    </form>
+
+    <div id="loading" style="display: none;">Analyzing image and generating story...</div>
+    <div id="story"></div>
+    <div id="error"></div>
+    <img id="uploadedImage" src="" alt="Uploaded image" style="display: none;">
+
+
+    <script>
+        document.getElementById('uploadForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            var formData = new FormData(this);
+            var loadingDiv = document.getElementById('loading');
+            var storyDiv = document.getElementById('story');
+            var errorDiv = document.getElementById('error');
+            var imageElement = document.getElementById('uploadedImage');
+
+            // Clear previous content and show loading message
+            loadingDiv.style.display = 'block';
+            storyDiv.innerHTML = '';
+            errorDiv.innerHTML = '';
+            imageElement.style.display = 'none';
+
+            fetch('/generate-story', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                loadingDiv.style.display = 'none';
+                if (data.error) {
+                    errorDiv.innerHTML = 'Error: ' + data.error;
+                } else {
+                    storyDiv.innerHTML = '<h2>Generated Story:</h2><p>' + data.story + '</p>';
+                    imageElement.src = data.image_url;
+                    imageElement.style.display = 'block';
+                }
+            })
+            .catch(error => {
+                loadingDiv.style.display = 'none';
+                errorDiv.innerHTML = 'Error: ' + error.message;
+            });
+        });
+    </script>
+</body>
+</html>
