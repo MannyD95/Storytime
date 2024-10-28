@@ -8,7 +8,17 @@ Ideally, after future iterations it could seamlessly generate short stories that
 Also, I wanted to try out web dev, thus the choice of using Flask and boilerplate HTML with some JS for async and backend communication <br>
 
 ## Running the App <br>
-As of writing, it is not hosted publically, so to run the app you would need to clone the repo locally and input a secret key and your own OpenAI API key
+As of writing, it is not hosted publically, so to run the app you would need to clone the repo locally. Also, be sure to have the necessary libraries installed: <br>
+
+pip install Flask <br>
+pip install openai <br>
+
+To protect your OpenAI API key, set up the necessary environment variables by creating a .env file in the root directory <br>
+> i.e OPENAI_API_KEY=your-openai-api-key
+<br>
+Make sure the static/uploads directory exists to store uploaded images. You can manually create it with: mkdir -p static/uploads <br>
+<br>
+Run the Application with flask by inputting flask run at the command line, and the local server will be launched <br>
 
 ## Future Considerations/Roadmap <br>
 I want to make this program more feature-complete, this will involve: <br>
@@ -18,4 +28,4 @@ I want to make this program more feature-complete, this will involve: <br>
 > 
 > A toggle for genres and/or flavour text
 > 
-> Troubleshooting .png image previewing
+> Troubleshooting .png image previewing and optimizing file storage
